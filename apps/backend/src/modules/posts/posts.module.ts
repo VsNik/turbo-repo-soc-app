@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
+import { CqrsModule } from '@nestjs/cqrs';
 import { POSTS_REPO } from './domain';
-import { PostsRepository } from './infrastructure/posts.repository';
 import { FILE_UPLOADER } from 'src/common/types';
 import { FsUploader } from 'src/common/utils';
 import { COMMAND_HANDLERS, QUERY_HANDLERS } from './application';
 import { PostsController } from './posts.condroller';
 import { USERS_REPO } from '../users/domain';
 import { UsersRepository } from '../users/infrastructure';
-import { CqrsModule } from '@nestjs/cqrs';
+import { PostsRepository } from './infrastructure';
 
 @Module({
   imports: [CqrsModule],

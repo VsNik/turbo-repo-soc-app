@@ -34,6 +34,14 @@ export class Post {
     return this.author.id === userId;
   }
 
+  incrimentPostCount() {
+    this.commentCount++;
+  }
+
+  decrimentPostCount() {
+    this.commentCount--;
+  }
+
   addLike(user: User) {
     this.likes.add(user);
     this.likeCount++;
