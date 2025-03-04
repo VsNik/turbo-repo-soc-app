@@ -238,7 +238,7 @@
           "primary": false,
           "nullable": false,
           "length": 255,
-          "default": "'2025-03-03T22:45:45.309Z'",
+          "default": "'2025-03-04T11:42:12.529Z'",
           "mappedType": "string"
         }
       },
@@ -351,6 +351,178 @@
           "nullable": false,
           "mappedType": "uuid"
         },
+        "issuer_id": {
+          "name": "issuer_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        },
+        "post_id": {
+          "name": "post_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "default": "null",
+          "mappedType": "uuid"
+        },
+        "type": {
+          "name": "type",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "default": "'POST_LIKE'",
+          "enumItems": [
+            "POST_LIKE",
+            "FOLLOW",
+            "COMMENT",
+            "POST_NEW"
+          ],
+          "mappedType": "enum"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamptz",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 6,
+          "mappedType": "datetime"
+        }
+      },
+      "name": "notification-objects",
+      "schema": "public",
+      "indexes": [
+        {
+          "keyName": "notification-objects_pkey",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "notification-objects_issuer_id_foreign": {
+          "constraintName": "notification-objects_issuer_id_foreign",
+          "columnNames": [
+            "issuer_id"
+          ],
+          "localTableName": "public.notification-objects",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.users",
+          "updateRule": "cascade"
+        },
+        "notification-objects_post_id_foreign": {
+          "constraintName": "notification-objects_post_id_foreign",
+          "columnNames": [
+            "post_id"
+          ],
+          "localTableName": "public.notification-objects",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.posts",
+          "deleteRule": "set null",
+          "updateRule": "cascade"
+        }
+      },
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        },
+        "notify_object_id": {
+          "name": "notify_object_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        },
+        "receive_id": {
+          "name": "receive_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        },
+        "is_read": {
+          "name": "is_read",
+          "type": "boolean",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "default": "false",
+          "mappedType": "boolean"
+        }
+      },
+      "name": "notifications",
+      "schema": "public",
+      "indexes": [
+        {
+          "keyName": "notifications_pkey",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "notifications_notify_object_id_foreign": {
+          "constraintName": "notifications_notify_object_id_foreign",
+          "columnNames": [
+            "notify_object_id"
+          ],
+          "localTableName": "public.notifications",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.notification-objects",
+          "updateRule": "cascade"
+        }
+      },
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        },
         "content": {
           "name": "content",
           "type": "varchar(255)",
@@ -397,7 +569,7 @@
           "primary": false,
           "nullable": false,
           "length": 255,
-          "default": "'2025-03-03T22:45:45.308Z'",
+          "default": "'2025-03-04T11:42:12.528Z'",
           "mappedType": "string"
         }
       },

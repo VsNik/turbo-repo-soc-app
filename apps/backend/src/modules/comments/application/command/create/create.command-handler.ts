@@ -7,6 +7,7 @@ import {
   ICommentsRepository,
 } from 'src/modules/comments/domain';
 import { IPostsRepository, POSTS_REPO } from 'src/modules/posts/domain';
+import { PostCommentedEvent } from 'src/modules/comments/domain/events';
 
 @CommandHandler(CreateCommand)
 export class CreateCommandHandler implements ICommandHandler<CreateCommand> {
@@ -21,7 +22,7 @@ export class CreateCommandHandler implements ICommandHandler<CreateCommand> {
     const connentEntity = new Comment(currentUser, post, content);
     post.incrimentPostCount();
     const comment = await this.commentsRepo.create(connentEntity);
-    this.eventBus.publish({});
+    this.eventBus.publish(new PostCommentedEvent(post.id, comment));
 
     return comment.toJSON(currentUser);
   }

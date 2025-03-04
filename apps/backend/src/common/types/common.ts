@@ -30,3 +30,10 @@ export enum UploadType {
   Post = 'post',
   Chat = 'chat',
 }
+
+export enum NotificationType {
+  Like = 'POST_LIKE',
+  Follow = 'FOLLOW',
+  Comment = 'COMMENT',
+  NewPost = 'POST_NEW',
+}
