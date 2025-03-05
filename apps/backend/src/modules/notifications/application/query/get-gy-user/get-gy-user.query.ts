@@ -1,3 +1,3 @@
 export class GetByUserQuery {
-  constructor() {}
+  constructor(public currentId: string) {}
 }

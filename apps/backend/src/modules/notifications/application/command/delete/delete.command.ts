@@ -1,3 +1,6 @@
 export class DeleteCommand {
-  constructor() {}
+  constructor(
+    public notifyId: string,
+    public currentId: string,
+  ) {}
 }
