@@ -1,6 +1,9 @@
+import { User } from 'src/modules/users/domain';
+import { Post } from '../post.entity';
+
 export class PostLikedEvent {
   constructor(
-    public postId: string,
-    public userId: string,
+    public post: Post,
+    public user: User,
   ) {}
 }

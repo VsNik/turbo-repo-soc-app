@@ -3,5 +3,5 @@ export { NotificationObject } from './notification-object';
 export { NOTIFY_REPO, INotifyRepository } from './notify-repository.interface';
 export {
   NOTIFY_OBJECT_REPO,
-  InotifyObjectRepository,
+  INotifyObjectRepository,
 } from './notify-object-repository.interface';

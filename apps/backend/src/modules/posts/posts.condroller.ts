@@ -156,10 +156,10 @@ export class PostsController {
   @Post()
   async create(
     @Body() { caption }: CreateDto,
-    @CurrentUser() user: User,
+    @CurrentUser('id') currentId: string,
     @UploadedFile() file: FileExpress,
   ) {
-    const command = new CreateCommand(user, file, caption);
+    const command = new CreateCommand(currentId, file, caption);
     const result = await this.commandBus.execute(command);
     return fillObject(PostResponse, result);
   }

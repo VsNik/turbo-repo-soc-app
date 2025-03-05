@@ -20,14 +20,14 @@ export class ToggleLikeCommandHandler
   ) {}
 
   async execute({ postId, currentUser }: ToggleLikeCommand): Promise<IPost> {
-    const post = await this.postsRepo.findOne(postId);
+    const post = await this.postsRepo.findOne(postId, ['likes']);
     if (!post) {
       throw new NotFoundException(POST_NOT_FOUND);
     }
 
     if (!post.isLiked(currentUser)) {
       post.addLike(currentUser);
-      this.eventBus.publish(new PostLikedEvent(post.id, currentUser.id));
+      this.eventBus.publish(new PostLikedEvent(post, currentUser));
     } else {
       post.removeLike(currentUser);
     }

@@ -16,6 +16,7 @@ import {
   UploadType,
 } from 'src/common/types';
 import { detectFileType } from 'src/common/utils';
+import { IUsersRepository } from 'src/modules/users/domain';
 
 @CommandHandler(CreateCommand)
 export class CreateCommandHandler
@@ -23,14 +24,16 @@ export class CreateCommandHandler
 {
   constructor(
     @Inject(POSTS_REPO) private readonly postsRepo: IPostsRepository,
+    @Inject(POSTS_REPO) private readonly usersRepo: IUsersRepository,
     @Inject(FILE_UPLOADER) private readonly uploader: IUploader,
     private readonly eventBus: EventBus,
   ) {}
 
-  async execute({ currentUser, file, caption }: CreateCommand): Promise<IPost> {
+  async execute({ currentId, file, caption }: CreateCommand): Promise<IPost> {
     if (!file) {
       throw new BadRequestException('File is required');
     }
+    const currentUser = await this.usersRepo.findById(currentId, ['following']);
     const media = await this.uploader.uploadFile(file, UploadType.Post);
 
     const postType =
@@ -42,7 +45,10 @@ export class CreateCommandHandler
 
     await this.postsRepo.flush();
 
-    this.eventBus.publish(new PostCreatedEvent(newPost.id, currentUser.id));
+    const recipientIDs = currentUser.following.getIdentifiers('id');
+    this.eventBus.publish(
+      new PostCreatedEvent(newPost, currentUser, recipientIDs),
+    );
 
     return newPost.toJSON(currentUser);
   }

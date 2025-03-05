@@ -13,4 +13,11 @@ export class Notification {
     this.receiveId = receiveId;
     this.isRead = false;
   }
+
+  formatNotify() {
+    const notify = { ...this, ...this.notifyObject };
+    notify.id = this.id;
+    delete notify.notifyObject;
+    return notify;
+  }
 }

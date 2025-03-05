@@ -1,8 +1,9 @@
-import { Comment } from '../comment.entity';
+import { Post } from 'src/modules/posts/domain';
+import { User } from 'src/modules/users/domain';
 
 export class PostCommentedEvent {
   constructor(
-    public postId: string,
-    public comment: Comment,
+    public post: Post,
+    public user: User,
   ) {}
 }

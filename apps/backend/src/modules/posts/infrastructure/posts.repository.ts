@@ -7,6 +7,7 @@ import {
   QueryOrder,
 } from '@mikro-orm/postgresql';
 import { PostsFilter } from './post.filter';
+import { PostRelations } from './types';
 
 @Injectable()
 export class PostsRepository implements IPostsRepository {
@@ -45,8 +46,8 @@ export class PostsRepository implements IPostsRepository {
     return qb.getResultAndCount();
   }
 
-  async findOne(id: string): Promise<Post> {
-    return this.repository.findOne({ id });
+  async findOne(id: string, relations?: PostRelations[]): Promise<Post> {
+    return this.repository.findOne({ id }, { populate: relations });
   }
 
   async findByIDs(
@@ -80,7 +81,7 @@ export class PostsRepository implements IPostsRepository {
   private getQueryBuilder(): QueryBuilder<Post> {
     return this.repository
       .createQueryBuilder('posts')
-      .joinAndSelect('posts.author', 'a');
-    // .leftJoinAndSelect('posts.likes', 'l');
+      .joinAndSelect('posts.author', 'a')
+      .leftJoinAndSelect('posts.likes', 'l');
   }
 }

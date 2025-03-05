@@ -8,7 +8,7 @@ import {
 import { NOTIFY_OBJECT_REPO, NOTIFY_REPO } from './domain';
 import { NotifyObjectRepository, NotifyRepository } from './infrastructure';
 import { NotificationsController } from './notifications.controller';
-import { NotificationsGateway } from './notifications.gateway';
+import { NotifyGateway } from './notifications.gateway';
 import { JwtModule } from '@nestjs/jwt';
 
 @Module({
@@ -25,7 +25,7 @@ import { JwtModule } from '@nestjs/jwt';
       provide: NOTIFY_OBJECT_REPO,
       useClass: NotifyObjectRepository,
     },
-    NotificationsGateway,
+    NotifyGateway,
   ],
   controllers: [NotificationsController],
 })

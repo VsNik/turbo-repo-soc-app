@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { InotifyObjectRepository, NotificationObject } from '../domain';
+import { INotifyObjectRepository, NotificationObject } from '../domain';
 import { EntityManager, EntityRepository } from '@mikro-orm/postgresql';
 
 @Injectable()
-export class NotifyObjectRepository implements InotifyObjectRepository {
+export class NotifyObjectRepository implements INotifyObjectRepository {
   private em: EntityManager;
   private repository: EntityRepository<NotificationObject>;
 

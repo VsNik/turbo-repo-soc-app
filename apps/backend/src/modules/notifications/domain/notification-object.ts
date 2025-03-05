@@ -6,7 +6,7 @@ import { User } from 'src/modules/users/domain';
 
 export class NotificationObject {
   id: string;
-  issuer: User;
+  issuer: User; // отправитель
   post?: Post;
   type: NotificationType;
   createdAt: string;
@@ -16,6 +16,7 @@ export class NotificationObject {
     this.issuer = issuer;
     this.type = type;
     this.post = post;
+    this.createdAt = new Date().toISOString();
   }
 
   toJSON(): EntityDTO<NotificationObject> {

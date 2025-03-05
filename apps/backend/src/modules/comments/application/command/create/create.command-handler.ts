@@ -22,7 +22,7 @@ export class CreateCommandHandler implements ICommandHandler<CreateCommand> {
     const connentEntity = new Comment(currentUser, post, content);
     post.incrimentPostCount();
     const comment = await this.commentsRepo.create(connentEntity);
-    this.eventBus.publish(new PostCommentedEvent(post.id, comment));
+    this.eventBus.publish(new PostCommentedEvent(post, currentUser));
 
     return comment.toJSON(currentUser);
   }
