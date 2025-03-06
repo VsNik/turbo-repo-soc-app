@@ -3,8 +3,8 @@ import { Content } from "@shared/ui/content";
 import { GoogleButton } from "@shared/ui/google-button";
 import { Widget } from "@shared/ui/widget";
 import { Link } from "react-router-dom";
-import { LoginForm } from "./login-form";
 import { ThemeToggler } from "@features/theme-toggler";
+import { LoginForm } from "@features/auth";
 
 export function LoginPage() {
   return (
@@ -20,7 +20,7 @@ export function LoginPage() {
             />
           </div>
           <div className="flex flex-col w-full h-full sm:w-1/2 space-y-3 p-10">
-            <h1 className="text-2xl font-bold">LogIn to SocApp</h1>
+            <h1 className="text-2xl font-medium text-center">Log in</h1>
             <LoginForm />
             <div className="flex items-center gap-3">
               <div className="h-px flex-1 bg-muted" />

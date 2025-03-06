@@ -1,3 +1,11 @@
+import { useSession } from "@entities/session";
+
 export function HomePage() {
-  return <h3>Home Pahe</h3>;
+  const { session } = useSession();
+  return (
+    <>
+      <h3>Home Page</h3>
+      <strong>{session?.displayName}</strong>
+    </>
+  );
 }

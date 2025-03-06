@@ -2,7 +2,7 @@ import { PostType } from "./common";
 
 export type Auth = {
   user: User;
-  token: string;
+  access_token: string;
 };
 
 export type User = {

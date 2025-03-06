@@ -2,9 +2,9 @@ import { ThemeToggler } from "@features/theme-toggler";
 import { Content } from "@shared/ui/content";
 import { Widget } from "@shared/ui/widget";
 import { Link } from "react-router-dom";
-import { SignupForm } from "./signup-form";
 import { GoogleButton } from "@shared/ui/google-button";
 import { RoutesName } from "@shared/constants";
+import { SignupForm } from "@features/auth";
 
 export function SignupPage() {
   return (
@@ -20,7 +20,7 @@ export function SignupPage() {
             />
           </div>
           <div className="flex flex-col w-full h-full sm:w-1/2 space-y-3 p-10">
-            <h1 className="text-3xl font-bold">Sign Up to SocApp</h1>
+            <h1 className="text-2xl font-medium text-center">Sign up</h1>
 
             <SignupForm />
 

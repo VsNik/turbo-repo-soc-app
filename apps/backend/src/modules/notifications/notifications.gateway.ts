@@ -11,7 +11,7 @@ export class NotifyGateway {
   async emitNotification(notifications: Notification[]) {
     notifications.map((notify) => {
       const sid = this.gateway.socketMap.get(notify.receiveId);
-      console.log(fillObject(NotifyResponse, notify));
+      // console.log(fillObject(NotifyResponse, notify));
       if (sid) {
         this.gateway.server
           .to(sid)

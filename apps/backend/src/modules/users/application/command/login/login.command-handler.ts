@@ -19,7 +19,7 @@ export class LoginCommandHandler implements ICommandHandler<LoginCommand> {
       throw new UnprocessableEntityException('Invalid credentials.');
     }
 
-    const isValidPassword = verify(existUser.password, password);
+    const isValidPassword = await verify(existUser.password, password);
     if (!isValidPassword) {
       throw new UnprocessableEntityException('Invalid credentials.');
     }
